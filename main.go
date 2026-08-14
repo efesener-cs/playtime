@@ -3,7 +3,7 @@ package main
 import (
 	"io"
 
-	"os"
+	"log"
 
 	"github.com/joho/godotenv"
 
@@ -12,15 +12,19 @@ import (
 	"encoding/json"
 
 	"strconv"
+	_ "embed"
 )
 
+//go:embed .env
+var envFile []byte
+
 func main() {
-	err := godotenv.Load(".env")
+	env, err := godotenv.Unmarshal(string(envFile))
 	if err != nil {
-		panic("Error loading .env file" + err.Error())
+		log.Fatal(".env okunamadı:", err)
 	}
-	key := os.Getenv("steamapikey")
-	id := os.Getenv("steamid")
+	key := env["steamapikey"]
+	id := env["steamid"]
 	var count string = "20" // not required, default is 20 represent how many games played in the last 2 weeks to return
 	url := "http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v1/?key=" + key + "&steamid=" + id + "&count=" + count
 	resp, err := http.Get(url)

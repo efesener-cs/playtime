@@ -64,4 +64,5 @@ func main() {
 		println("Game: " + game.Name + ", Playtime in last 2 weeks: " + strconv.Itoa(game.Playtime2Weeks) + " minutes")
 	}
 	println("Total playtime in last 2 weeks: " + strconv.Itoa(totalPlaytime) + " minutes")
+	println("Total playtime in last 2 weeks: as hour:" + strconv.FormatFloat((float64(totalPlaytime)/float64(60)), 'f', 2, 64))
 }

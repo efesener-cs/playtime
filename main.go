@@ -21,7 +21,7 @@ var envFile []byte
 func main() {
 	env, err := godotenv.Unmarshal(string(envFile))
 	if err != nil {
-		log.Fatal(".env okunamadı:", err)
+		log.Fatal("can't read .env:", err)
 	}
 	key := env["steamapikey"]
 	id := env["steamid"]
